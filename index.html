@@ -33,7 +33,7 @@
   ::selection{background:var(--box);color:#fff}
   a{color:inherit;text-decoration:none}
 
-  .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+  .wrap{max-width:1800px;margin:0 auto;padding:0 clamp(28px,5vw,96px)}
 
   /* grid backdrop */
   .grid-bg{
@@ -66,8 +66,18 @@
   header{
     position:relative;z-index:1;
     min-height:100vh;
-    display:flex;flex-direction:column;justify-content:center;
+    display:flex;align-items:center;
     padding:120px 0 80px;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1fr 400px;
+    gap:clamp(32px,5vw,96px);
+    align-items:center;
+    width:100%;
+  }
+  @media(max-width:880px){
+    .hero-grid{grid-template-columns:1fr}
   }
   .eyebrow{
     font-family:'JetBrains Mono',monospace;font-size:12px;
@@ -78,14 +88,14 @@
   h1{
     font-family:'Space Grotesk',sans-serif;
     font-weight:700;
-    font-size:clamp(48px,9vw,108px);
+    font-size:clamp(44px,6.5vw,92px);
     line-height:.96;
     letter-spacing:-.03em;
     margin-bottom:28px;
   }
   h1 .line2{color:var(--muted);display:block}
   .lede{
-    max-width:600px;font-size:18px;color:#41506240;color:#3c4a5c;margin-bottom:40px;
+    max-width:600px;font-size:18px;color:#3c4a5c;margin-bottom:40px;
   }
   .lede b{color:var(--ink);font-weight:600}
   .hero-meta{
@@ -101,10 +111,13 @@
 
   /* detection box around hero photo */
   .detect-portrait{
-    position:absolute;right:0;top:50%;transform:translateY(-50%);
-    width:300px;height:360px;display:none;
+    position:relative;
+    width:100%;max-width:400px;aspect-ratio:5/6;
+    justify-self:end;
   }
-  @media(min-width:900px){.detect-portrait{display:block}}
+  @media(max-width:880px){
+    .detect-portrait{justify-self:start;max-width:280px;margin-top:8px}
+  }
   .detect-portrait .frame{
     position:absolute;inset:0;
     border:1.5px solid var(--box);
@@ -163,7 +176,7 @@
   .tl-org{font-size:14px;color:var(--muted)}
 
   /* projects */
-  .proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(420px,1fr));gap:22px}
   @media(max-width:760px){.proj-grid{grid-template-columns:1fr}}
   .card{
     position:relative;background:var(--panel);border:1px solid var(--line);
@@ -234,27 +247,31 @@
 
   <!-- HERO -->
   <header>
-    <div class="eyebrow">Computer Vision &amp; AI Researcher</div>
-    <h1>In-Hwan Jang<span class="line2">sees the real world.</span></h1>
-    <p class="lede">
-      Undergraduate researcher building vision systems that perceive what they were never trained to expect.
-      I work on <b>zero-shot &amp; open-vocabulary detection</b>, <b>out-of-distribution analysis</b>,
-      and <b>multimodal AI</b> — proving new possibilities rather than only using finished tools.
-    </p>
-    <div class="hero-meta">
-      <span class="chip">Chonnam National Univ.</span>
-      <span class="chip">VCL — Visual Computing &amp; Learning Lab</span>
-      <span class="chip">GPA 3.77 / 4.5</span>
-      <span class="chip">IPIU 2026 · Best Paper (Encouragement)</span>
-    </div>
+    <div class="hero-grid">
+      <div class="hero-text">
+        <div class="eyebrow">Computer Vision &amp; AI Researcher</div>
+        <h1>In-Hwan Jang<span class="line2">sees the real world.</span></h1>
+        <p class="lede">
+          Undergraduate researcher building vision systems that perceive what they were never trained to expect.
+          I work on <b>zero-shot &amp; open-vocabulary detection</b>, <b>out-of-distribution analysis</b>,
+          and <b>multimodal AI</b> — proving new possibilities rather than only using finished tools.
+        </p>
+        <div class="hero-meta">
+          <span class="chip">Chonnam National Univ.</span>
+          <span class="chip">VCL — Visual Computing &amp; Learning Lab</span>
+          <span class="chip">GPA 3.77 / 4.5</span>
+          <span class="chip">IPIU 2026 · Best Paper (Encouragement)</span>
+        </div>
+      </div>
 
-    <div class="detect-portrait" aria-hidden="true">
-      <div class="frame"></div>
-      <span class="label">person&nbsp;·&nbsp;researcher&nbsp;0.98</span>
-      <div class="corner tl"></div><div class="corner tr"></div>
-      <div class="corner bl"></div><div class="corner br"></div>
-      <div class="scan"></div>
-      <div class="inner">conf&nbsp;0.98 &nbsp;|&nbsp; class: in_distribution</div>
+      <div class="detect-portrait" aria-hidden="true">
+        <div class="frame"></div>
+        <span class="label">person&nbsp;·&nbsp;researcher&nbsp;0.98</span>
+        <div class="corner tl"></div><div class="corner tr"></div>
+        <div class="corner bl"></div><div class="corner br"></div>
+        <div class="scan"></div>
+        <div class="inner">conf&nbsp;0.98 &nbsp;|&nbsp; class: in_distribution</div>
+      </div>
     </div>
   </header>
 
